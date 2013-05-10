@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Now there's an easy way to embed Facebook galleries in your Wordpress installation. Using shortcodes you can custom select any image from your profile and pages!
+Now there's an easy way to embed custom Facebook galleries in your Wordpress installation from your profile or pages!
 
 == Description ==
 
