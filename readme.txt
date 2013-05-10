@@ -14,6 +14,10 @@ Now there's an easy way to embed custom Facebook galleries in your Wordpress ins
 
 WordPress Facebook Photos provides an easy way for you to create custom galleries for your WordPress blog.  Simply create a [Facebook app](https://developers.facebook.com/apps), then connect your account and you're ready to go. All of your photos from your Facebook profile as well as all the pages you manage will immediately be available to choose from. After you're done choosing then hit "Create" and you'll be given a shortcode with your gallery inside. You can also embed as many galleries as you want on any page or post.
 
+If you have any comments, questions, or thoughts, put them in the comments [at this blog post](https://www.patrickcason.com/wordpress-facebook-photo-galleries/).
+
+[Check out my website](https://www.patrickcason.com/) too for other projects I'm working on!
+
 == Installation ==
 
 1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
