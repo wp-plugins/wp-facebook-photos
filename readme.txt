@@ -51,16 +51,20 @@ The plugin has to get information from Facebook, it could be downloading 200 ima
 
 == Changelog ==
 
+= 0.4 =
+* Re-programmed entire plugin using the Javascript, for asynchronous loading, removed PHP SDK
+* Fixed bugs with authentication and loading of images
+* Added support for custom CSS
+* Added support for custom Javascript
+
 = 0.2 =
 * Initial release
 
 == Roadmap ==
 
-* AJAX-loaded front-end
 * Tags
 * Comments
-* Custom CSS
-* Custom Javascript/built-in lightboxes
+* Built-in lightboxes
 * Preview of your gallery
 * Reordering of your gallery
 * Editing of existing galleries

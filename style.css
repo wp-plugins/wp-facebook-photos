@@ -1,29 +1,20 @@
 @charset "UTF-8";
 
-.loader {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 32px;
-	height: 32px;
-	margin-left: -16px;
-	margin-top: -16px;
-	background: url('images/loader.gif') no-repeat;
-	display: none;
-	z-index: 1000000;
+.images {
+	overflow: hidden;
+	list-style-type: none;
+	padding-left: 0px;
 }
-
-.images, .facebookGallery { overflow: hidden; list-style-type: none; }
 
 .images li {
 	float: left;
 	width: 130px;
 	height: 130px;
 	padding: 5px;
-	border: 2px solid #FFF;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
+	border: 1px solid #FFF;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 	margin: 0px 10px 10px 0px;
 	cursor: pointer;
 	-webkit-transition: all 0.1s linear;
@@ -33,30 +24,12 @@
 	transition: all 0.1s linear;
 }
 
-.images li:hover { background: #EEE; }
 .images img { display: block; margin: 0 auto; }
 
 .images li.selected {
-	background: #CCC;
-	border: 2px solid #666;
+	background: #EEE;
+	border: 1px solid #999;
 }
-
-.facebookGallery li {
-	float: left;
-	width: 130px;
-	height: 130px;
-	padding: 5px;
-	margin: 0px 10px 10px 0px;
-}
-
-.facebookGallery img {
-	margin: 0 auto;
-	display: block;
-	max-width: 130px !important;
-	max-height: 130px !important;
-}
-
-.facebookErrors { text-align: center; }
 
 .albumSelector { width: 300px; height: 30px !important; }
 
@@ -86,3 +59,9 @@
 }
 
 .createGalleryHold .selDesel { text-align: center; }
+
+.customCSS, .customJS {
+	width: 600px;
+	height: 200px;
+	resize: none;
+}

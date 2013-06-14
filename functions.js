@@ -1,24 +1,64 @@
-function initFacebook(appId, channelUrl) {
+function initFacebook(appId, channelUrl, getPhotos) {
 	window.fbAsyncInit = function() {
 		FB.init({
 			appId: appId,
 			channelUrl: channelUrl,
 			cookie: true,
-			xfbml: false,
+			xfbml: true,
 			oauth: true
 		});
-		FB.Event.subscribe('auth.login', function(response) {
-        	window.location.reload();
-        });
-        FB.Event.subscribe('auth.logout', function(response) {
-        	window.location.reload();
-        });
+		
+		FB.Event.subscribe('auth.authResponseChange', function(response) {
+			if(response.status === 'connected')
+		    	runApp();
+			else if(response.status === 'not_authorized')
+		    	FB.login();
+			else
+		    	FB.login();
+		});
+		
+		if(true) {
+			$('.facebookGallery').each(function() {
+				var thePhotos = $(this).html();
+				var photosFQL = encodeURIComponent('SELECT src_height, src_width, src, src_big FROM photo WHERE object_id IN (' + thePhotos + ')');
+				var $gallery = $(this);
+				var theGalID = $(this).attr('data-gallery-id');
+				
+				FB.api('/fql?q=' + photosFQL, function(photos) {
+					$gallery.html('').show();
+					
+					$.each(photos.data, function(index, value) {
+						var marginTop = -1*(value.src_height/2);
+						var marginLeft = -1*(value.src_width/2);
+						
+						$gallery.append("<li><a href='" + value.src_big + "' rel='" + theGalID + "'><img src='" + value.src_big + "' style='margin-top: " + marginTop + "px; margin-left: " + marginLeft + "px;'></a></li>");
+					});
+				});
+			});
+		}
 	};
-	(function() {
-		var e = document.createElement('script'); e.async = true;
-		e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-		document.getElementById('fb-root').appendChild(e);
-	}());
+	(function(d){
+		var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement('script'); js.id = id; js.async = true;
+		js.src = "//connect.facebook.net/en_US/all.js";
+		ref.parentNode.insertBefore(js, ref);
+	}(document));
+	
+	function runApp() {
+		$('.token').html(FB.getAuthResponse()['accessToken']);
+		$('.loginButton').hide();
+		
+		FB.api('/me', function(response) {
+			$('.albumSelector').append('<option value="' + response.id + '">' + response.name + '</option>');
+		});
+		
+		FB.api('/me/accounts', function(response) {
+			for(var i = 0; i < response['data'].length; i++) {
+				$('.albumSelector').append('<option value="' + response['data'][i].id + '">' + response['data'][i].name + '</option>');
+			}
+		});
+	}
 }
 
 var $ = jQuery;
@@ -76,14 +116,15 @@ $(document).on('change', '.albumSelector', function() {
 	$photos.fadeOut(250).html("").append('<ul class="images">');
 	
 	var $images = $photos.find('.images');
-	
 	var albumFQL = encodeURIComponent('SELECT object_id FROM album WHERE owner = "' + theValue + '" ORDER BY created DESC LIMIT 0,20');
 	
 	FB.api('/fql?q=' + albumFQL + '&access_token=' + accessToken, function(albums) {
+		console.log(albums);
 		$.each(albums.data, function(index, value) {
 			var photoFQL = encodeURIComponent('SELECT src_height, src_width, object_id, src FROM photo WHERE album_object_id = "' + value.object_id + '" ORDER BY created DESC LIMIT 0,200');
 			
 			FB.api('/fql?q=' + photoFQL + '&access_token=' + accessToken, function(photos) {
+				console.log(photos);
 				$.each(photos.data, function(index, value) {
 					var ratio = value.src_height/value.src_width;
 					

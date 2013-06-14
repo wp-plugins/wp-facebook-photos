@@ -3,7 +3,7 @@
 		Plugin Name: Wordpress Facebook Photos
 		Plugin URI: http://wordpress.org/extend/plugins/wp-facebook-photos
 		Description: Connect your facebook account and add photo galleries to your posts and pages!
-		Version: 0.2
+		Version: 0.4
 		Author: Patrick Cason
 		Author URI: https://www.patrickcason.com
 		License: GPL2
